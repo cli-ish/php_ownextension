@@ -11,4 +11,9 @@ RUN ./configure --enable-php-ownextension
 RUN make
 RUN make install
 
-CMD ["php", "-d", "extension=php_ownextension.so", "-r", "ownfunction(); ownfunctionarg('hello world (args)');"]
+# Probably the stupidest way to add it to the list of php extensions :D
+RUN echo 'extension=php_ownextension.so' > /etc/php/8.1/mods-available/php_ownextension.ini
+RUN sed  '/^;extension=curl$/a extension=php_ownextension' /etc/php/8.1/cli/php.ini
+RUN ln -s /etc/php/8.1/mods-available/php_ownextension.ini /etc/php/8.1/cli/conf.d/20-php_ownextension.ini 
+
+CMD ["php", "-r", "ownfunction(); ownfunctionarg('hello world (args)');"]
