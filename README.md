@@ -20,7 +20,14 @@ php -r "ownfunction(); ownfunctionarg('hello world (args)');"
 
 ## Docker
 
+*Testing*
 ```
 docker build -t ownphpextension .
 docker run -it ownphpextension:latest
+```
+
+*Debugging*
+```
+docker build -f Dockerfile.debug -t ownphpextension-debug .
+docker run -it ownphpextension-debug:latest
 ```
