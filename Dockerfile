@@ -7,12 +7,11 @@ COPY ./src /tmp/build
 WORKDIR /tmp/build
 
 RUN phpize
-RUN ./configure --enable-php-ownextension
+RUN ./configure --enable-ownextension
 RUN make
 RUN make install
 
-# Probably the stupidest way to add it to the list of php extensions :D
-RUN echo 'extension=php_ownextension.so' > /etc/php/8.1/mods-available/php_ownextension.ini
-RUN phpenmod php_ownextension
+RUN echo 'extension=ownextension.so' > /etc/php/8.1/mods-available/ownextension.ini
+RUN phpenmod ownextension
 
 CMD ["php", "-r", "ownfunction(); ownfunctionarg('hello world (args)');"]

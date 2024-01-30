@@ -1,5 +1,5 @@
 #include <php.h>
-#include "php_ownextension.h"
+#include "ownextension.h"
 
 // Define a new arginfo
 ZEND_BEGIN_ARG_INFO_EX(arginfo_void, 0, 0, 0)
@@ -13,21 +13,21 @@ zend_function_entry our_functions[] = {
 };
 
 // Define the module
-zend_module_entry ownextension_php_module_entry = {
+zend_module_entry ownextension_module_entry = {
     STANDARD_MODULE_HEADER,
-    PHP_OWNEXTENSION_EXTNAME,
+    OWNEXTENSION_EXTNAME,
     our_functions,
     NULL,
     NULL,
     NULL,
     NULL,
     NULL,
-    PHP_OWNEXTENSION_VERSION,
+    OWNEXTENSION_VERSION,
     STANDARD_MODULE_PROPERTIES
 };
 
 // Make it dynamic
-ZEND_GET_MODULE(ownextension_php)
+ZEND_GET_MODULE(ownextension)
 
 // Our functions will be called here.
 PHP_FUNCTION(ownfunction) {

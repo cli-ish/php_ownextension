@@ -8,10 +8,14 @@ just a small little template to be able to create php extensions for a ctf if re
 apt-get update && apt-get install -y build-essential php8.1 php8.1-dev 
 cd ./src
 phpize
-./configure --enable-php-ownextension
+./configure --enable-ownextension
 make
 make install
-php -d extension=php_ownextension.so -r "ownfunction(); ownfunctionarg('hello world (args)');"
+
+echo 'extension=ownextension.so' > /etc/php/8.1/mods-available/ownextension.ini
+phpenmod ownextension
+
+php -r "ownfunction(); ownfunctionarg('hello world (args)');"
 ```
 
 ## Docker
